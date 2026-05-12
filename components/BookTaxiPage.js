@@ -6,7 +6,7 @@ const cabs = [
     id: 'sedan',
     image: '/images/dzire.png',
     name: 'Sedan',
-    price: '₹12/km'
+    price: '₹14/km'
   },
   {
     id: 'etios',
