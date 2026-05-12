@@ -27,7 +27,7 @@ npm start
 ## 📁 Project Structure
 
 ```
-tamilnadu-top-taxi/
+tamilnadu-drop-taxi/
 ├── app/
 │   ├── layout.js          # Root layout (metadata, global CSS import)
 │   └── page.js            # Entry page (renders TamilNaduTopTaxi component)
