@@ -1047,7 +1047,6 @@ body {
 
 .stat-item {
   text-align: center;
-
   /* Fade animation */
   opacity: 0;
   transform: translateY(40px);
