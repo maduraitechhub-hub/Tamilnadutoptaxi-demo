@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 
 export const metadata = {
-  title: 'Tamil Nadu Top Taxi – Premium Cab Service',
+  title: 'Tamil Nadu Drop Taxi – Premium Cab Service',
   description: "Tamil Nadu's most trusted taxi service. Safe, affordable, and reliable cab booking across all 38 districts since 2015.",
 };
 
