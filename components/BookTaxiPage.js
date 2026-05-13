@@ -29,7 +29,7 @@ const cabs = [
 ];
 
 const fareDetails = {
-  sedan: { perKm: '₹12', driver: '₹400'},
+  sedan: { perKm: '₹14', driver: '₹400'},
   etios: { perKm: '₹14', driver: '₹400',},
   innova: { perKm: '₹19', driver: '₹400',},
   crysta: { perKm: '₹22', driver: '₹400',},
