@@ -32,9 +32,9 @@ export default function BookingForm({ compact = false, setPage }) {
         <button
           type="button"
           className={`tab-btn ${activeTab === 'outstation' ? 'active' : ''}`}
-          onClick={() => setActiveTab('outstation')}
+          onClick={() => setActiveTab('roundtrip')}
         >
-          Outstation
+          Roundtrip
         </button>
 
         <button
@@ -102,7 +102,7 @@ export default function BookingForm({ compact = false, setPage }) {
 
         {/* OUTSTATION */}
 
-        {activeTab === 'outstation' && (
+        {activeTab === 'roundtrip' && (
           <div className="form-grid">
             <div className="form-group">
               <label>Name</label>
