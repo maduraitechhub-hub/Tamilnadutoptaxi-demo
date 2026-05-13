@@ -31,10 +31,10 @@ export default function BookingForm({ compact = false, setPage }) {
 
         <button
           type="button"
-          className={`tab-btn ${activeTab === 'outstation' ? 'active' : ''}`}
+          className={`tab-btn ${activeTab === 'roundtrip' ? 'active' : ''}`}
           onClick={() => setActiveTab('roundtrip')}
         >
-          Roundtrip
+          Round Trip
         </button>
 
         <button
