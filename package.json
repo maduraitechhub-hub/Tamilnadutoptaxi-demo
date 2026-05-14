@@ -1,5 +1,5 @@
 {
-  "name": "tamilnadu-drop-taxi",
+  "name": "tamilnadudroptaxi",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,6 +14,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "next": "14.2.3",
+    "nodemailer": "^8.0.7",
     "react": "^18",
     "react-dom": "^18"
   },

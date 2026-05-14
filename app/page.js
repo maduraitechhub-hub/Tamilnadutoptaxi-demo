@@ -1,6 +1,6 @@
 'use client';
-import TamilNaduTopTaxi from '../components/TamilNaduTopTaxi';
+import TamilNaduDropTaxi from '../components/TamilNaduDropTaxi';
 
 export default function Page() {
-  return <TamilNaduTopTaxi />;
+  return <TamilNaduDropTaxi />;
 }

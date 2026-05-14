@@ -20,7 +20,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="about-grid">
             <div className="about-img-placeholder">
-              <img src="images/aboutimg.png" alt="About Tamil Nadu Top Taxi"  className="abtimg"/>
+              <img src="images/aboutimg.png" alt="About TamilNadu Drop Taxi"  className="abtimg"/>
               <div className="about-year-badge">
                 <div className="about-year">10+</div>
                 <div className="about-year-label">Years of Service</div>
@@ -30,7 +30,7 @@ export default function AboutPage() {
               <div className="about-label">Our Story</div>
               <h2 className="about-title">Your trusted travel connection across Tamil Nadu.</h2>
               <p className="about-desc">
-                Founded in 2015 in Madurai, Tamil Nadu Top Taxi started with a simple mission: to make safe, reliable intercity travel accessible to everyone across Tamil Nadu. What began as a small fleet of 5 cars has grown into a trusted network of 500+ verified drivers covering all 38 districts.
+                Founded in 2015 in Madurai, TamilNadu Drop Taxi started with a simple mission: to make safe, reliable intercity travel accessible to everyone across Tamil Nadu. What began as a small fleet of 5 cars has grown into a trusted network of 500+ verified drivers covering all 38 districts.
               </p>
               <p className="about-desc">
                 We understand the unique needs of Tamil Nadu travelers — from pilgrimage trips to Madurai and Rameswaram, to corporate travel between Chennai and Coimbatore. Our local knowledge, combined with professional service standards, makes us the preferred choice for millions.

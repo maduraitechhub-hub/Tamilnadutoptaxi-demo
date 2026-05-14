@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import BookingForm from './BookingForm';
 import StatsBar from './StatsBar';
+import FormFeedbackModal from './FormFeedbackModal';
 
 const services = [
   {
@@ -199,7 +200,7 @@ const testimonials = [
   {
     name: 'Rajesh Kumar',
     route: 'Madurai → Chennai',
-    text: 'Excellent service! The driver was punctual, polite, and the car was spotless. Highly recommend Tamil Nadu Top Taxi for intercity travel.',
+    text: 'Excellent service! The driver was punctual, polite, and the car was spotless. Highly recommend TamilNadu Drop Taxi for intercity travel.',
     rating: 5,
     image: '/images/user-1.png',
   },
@@ -220,7 +221,7 @@ const testimonials = [
 ];
 
 const faqs = [
-  { q: 'How do I book a taxi with Tamil Nadu Top Taxi?', a: 'You can book easily via our website form, by calling us at +91 8122148519, or by sending a WhatsApp message. We confirm your booking within 2 minutes.' },
+  { q: 'How do I book a taxi with TamilNadu Drop Taxi?', a: 'You can book easily via our website form, by calling us at +91 8122148519, or by sending a WhatsApp message. We confirm your booking within 2 minutes.' },
   { q: 'Are your drivers verified and licensed?', a: 'Yes, all our drivers are background verified, hold valid commercial licenses, and undergo regular training for safety and hospitality standards.' },
   { q: 'Do you provide service 24/7 including holidays?', a: 'Absolutely! We operate 24 hours a day, 7 days a week including all public holidays. You can reach us any time.' },
   { q: 'What cab types are available for outstation travel?', a: 'We offer Swift Dzire, Toyota Etios (economy), Toyota Innova (family), and Innova Crysta (premium) for all intercity and outstation trips.' },
@@ -230,6 +231,7 @@ const faqs = [
 
 export default function HomePage({ setPage }) {
   const [openFaq, setOpenFaq] = useState(null);
+  const [appModalOpen, setAppModalOpen] = useState(false);
 
   return (
     <>
@@ -248,7 +250,7 @@ export default function HomePage({ setPage }) {
               </div>
             </div>
             <h1 className="hero-title">
-              Book Trusted <span> Tamil Nadu</span> <em> Top Taxi</em>
+              Book <em>TamilNadu Drop Taxi</em> — trusted rides across <span>Tamil Nadu</span>
             </h1>
             <p className="hero-sub">
               Premium intercity cab booking across all 38 districts. Safe, reliable, and affordable
@@ -267,7 +269,7 @@ export default function HomePage({ setPage }) {
           </div>
           <div className="hero-right" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
             <div className="booking-card">
-              <BookingForm compact={true} setPage={setPage} />
+              <BookingForm compact={true} />
             </div>
           </div>
         </div>
@@ -276,7 +278,7 @@ export default function HomePage({ setPage }) {
       {/* service Us */}
       <section className="section servicesbg">
         <div className="container">
-          <div className="section-label">Explore our Top Taxi Services</div>
+          <div className="section-label">Explore TamilNadu Drop Taxi services</div>
           <h2 className="section-title">Tamil Nadu's Most <span>Trusted</span> Taxi Service</h2>
           <p className="section-sub">Reliable taxi services across Tamil Nadu offering safe, comfortable, and affordable rides for airport transfers, outstation trips, one-way drops, and round trips.</p>
           <div className="features-grid">
@@ -537,7 +539,7 @@ export default function HomePage({ setPage }) {
         <div className="container">
 
           <div className="app-title">
-            Tamil Nadu Top Taxi App — Coming Soon!
+            TamilNadu Drop Taxi App — Coming Soon!
           </div>
 
           <p className="app-sub">
@@ -548,14 +550,7 @@ export default function HomePage({ setPage }) {
           <div className="app-btns">
 
             {/* GOOGLE PLAY */}
-            <button
-              className="app-btn"
-              onClick={() =>
-                alert(
-                  'App coming soon! WhatsApp us at +91 8122148519 for updates.'
-                )
-              }
-            >
+            <button className="app-btn" type="button" onClick={() => setAppModalOpen(true)}>
               <div className="app-btn-icon">
                 <img
                   src="/images/playstore.png"
@@ -570,14 +565,7 @@ export default function HomePage({ setPage }) {
             </button>
 
             {/* APP STORE */}
-            <button
-              className="app-btn"
-              onClick={() =>
-                alert(
-                  'App coming soon! WhatsApp us at +91 8122148519 for updates.'
-                )
-              }
-            >
+            <button className="app-btn" type="button" onClick={() => setAppModalOpen(true)}>
               <div className="app-btn-icon">
                 <img
                   src="/images/app-store.png"
@@ -636,6 +624,13 @@ export default function HomePage({ setPage }) {
 
 
 
+      <FormFeedbackModal
+        open={appModalOpen}
+        variant="success"
+        title="Coming soon"
+        message="App coming soon! WhatsApp us at +91 8122148519 for updates."
+        onClose={() => setAppModalOpen(false)}
+      />
     </>
   );
 }

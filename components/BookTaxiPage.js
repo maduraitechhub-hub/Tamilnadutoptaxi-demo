@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import FormFeedbackModal from './FormFeedbackModal';
 
 const cabs = [
   {
@@ -37,12 +38,19 @@ const fareDetails = {
 
 export default function BookTaxiPage() {
   const [selectedCab, setSelectedCab] = useState('sedan');
+  const [bookingModal, setBookingModal] = useState({ open: false, title: '', message: '' });
   const fare = fareDetails[selectedCab];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Booking request received! Our team will call you within 5 minutes to confirm your cab.');
+    setBookingModal({
+      open: true,
+      title: 'Booking request received',
+      message: 'Our team will call you within 5 minutes to confirm your cab.',
+    });
   };
+
+  const closeBookingModal = () => setBookingModal((m) => ({ ...m, open: false }));
 
   return (
     <>
@@ -182,6 +190,14 @@ export default function BookTaxiPage() {
           </div>
         </div>
       </section>
+
+      <FormFeedbackModal
+        open={bookingModal.open}
+        variant="success"
+        title={bookingModal.title}
+        message={bookingModal.message}
+        onClose={closeBookingModal}
+      />
     </>
   );
 }

@@ -1,6 +1,6 @@
-# TamilNaduTopTaxi — Next.js Project
+# tamilnadudroptaxi — Next.js site
 
-Premium cab service website for Tamil Nadu, built with **Next.js 14** (App Router).
+Premium cab service website (**TamilNadu Drop Taxi**) for Tamil Nadu, built with **Next.js 14** (App Router).
 
 ## 🚀 Getting Started
 
@@ -27,12 +27,12 @@ npm start
 ## 📁 Project Structure
 
 ```
-tamilnadu-drop-taxi/
+tamilnadudroptaxi/
 ├── app/
 │   ├── layout.js          # Root layout (metadata, global CSS import)
-│   └── page.js            # Entry page (renders TamilNaduTopTaxi component)
+│   └── page.js            # Entry page (renders main app shell component)
 ├── components/
-│   ├── TamilNaduTopTaxi.js  # Main SPA shell (page state router)
+│   ├── TamilNaduDropTaxi.js # Main SPA shell (file name; brand: TamilNadu Drop Taxi)
 │   ├── Navbar.js            # Fixed responsive navigation
 │   ├── Footer.js            # Site footer
 │   ├── BookingForm.js       # Reusable booking form

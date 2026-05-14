@@ -2312,3 +2312,135 @@ body {
     gap: 10px;
   }
 }
+
+/* Form feedback modal (replaces alert) */
+.form-feedback-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(17, 34, 30, 0.55);
+  backdrop-filter: blur(6px);
+  animation: formModalFadeIn 0.2s ease;
+}
+
+@keyframes formModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.form-feedback-modal {
+  width: 100%;
+  max-width: 420px;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 24px 24px;
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(26, 46, 30, 0.25);
+  border: 1px solid var(--border);
+  animation: formModalPop 0.25s ease;
+}
+
+@keyframes formModalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.form-feedback-modal-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.form-feedback-modal-icon--success {
+  background: var(--green-light);
+  color: var(--green);
+  border: 2px solid var(--green);
+}
+
+.form-feedback-modal-icon--error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 2px solid #fecaca;
+}
+
+.form-feedback-modal-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.form-feedback-modal-message {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.form-feedback-modal-detail {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #888;
+  margin-bottom: 20px;
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--gray);
+  border-radius: 8px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.form-feedback-modal-detail code {
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.form-feedback-modal-ok {
+  width: 100%;
+  margin-top: 4px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: var(--white);
+  box-shadow: 0 4px 16px var(--shadow-green);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-feedback-modal-ok:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--shadow-green);
+}
+
+.form-feedback-modal-ok:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}

@@ -12,9 +12,9 @@ export default function Footer({ setPage }) {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src="/logo.png" alt="Tamil Nadu Top Taxi" className="footer-logo-img" />
+              <img src="/logo.png" alt="TamilNadu Drop Taxi" className="footer-logo-img" />
               <div>
-                <div className="footer-logo-name">TamilNadu Top Taxi</div>
+                <div className="footer-logo-name">TamilNadu Drop Taxi</div>
                 <div className="footer-logo-sub">Premium Cab Service</div>
               </div>
             </div>
@@ -109,7 +109,7 @@ export default function Footer({ setPage }) {
 
         <div className="footer-bottom">
           <span>
-            © 2026 <span className="footer-bottom-brand">TamilNadu Top Taxi</span>. All rights reserved.
+            © 2026 <span className="footer-bottom-brand">TamilNadu Drop Taxi</span>. All rights reserved.
           </span>
           <span>Made with ❤️ in Tamil Nadu</span>
         </div>
