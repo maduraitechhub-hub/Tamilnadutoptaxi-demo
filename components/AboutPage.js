@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const values = [
   'Safety First Approach',
   'Transparent Pricing',
@@ -20,7 +22,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="about-grid">
             <div className="about-img-placeholder">
-              <img src="images/aboutimg.png" alt="About TamilNadu Drop Taxi"  className="abtimg"/>
+              <Image src="images/aboutimg.png" alt="About TamilNadu Drop Taxi"  className="abtimg"/>
               <div className="about-year-badge">
                 <div className="about-year">10+</div>
                 <div className="about-year-label">Years of Service</div>
