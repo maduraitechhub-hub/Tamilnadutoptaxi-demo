@@ -22,7 +22,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="about-grid">
             <div className="about-img-placeholder">
-              <Image src="images/aboutimg.png" alt="About TamilNadu Drop Taxi"  className="abtimg"/>
+              <Image src="images/aboutimg.png" alt="About TamilNadu Drop Taxi" width={100} height={100}  className="abtimg"/>
               <div className="about-year-badge">
                 <div className="about-year">10+</div>
                 <div className="about-year-label">Years of Service</div>
