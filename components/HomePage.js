@@ -286,7 +286,7 @@ export default function HomePage({ setPage }) {
             {services.map((f) => (
               <div key={f.title} className="feature-card">
                 <div className="feature-icon">
-                  <Image src={f.icon} alt={f.title} />
+                  <Image src={f.icon} alt={f.title} width={100} height={100}/>
                 </div>
                 <div className="feature-title">{f.title}</div>
                 <div className="feature-desc">{f.desc}</div>
@@ -323,7 +323,7 @@ export default function HomePage({ setPage }) {
 
                   <Image
                     src={f.image}
-                    alt={f.name}
+                    alt={f.name} width={100} height={100}
                     className="fleet-car-image"
                   />
 
@@ -386,7 +386,7 @@ export default function HomePage({ setPage }) {
             {features.map((f) => (
               <div key={f.title} className="feature-card">
                 <div className="feature-icon">
-                  <Image src={f.icon} alt={f.title} />
+                  <Image src={f.icon} alt={f.title} width={100} height={100} />
                 </div>
                 <div className="feature-title">{f.title}</div>
                 <div className="feature-desc">{f.desc}</div>
@@ -424,7 +424,7 @@ export default function HomePage({ setPage }) {
 
                 {/* Route Image */}
                 <div className="route-image">
-                  <Image src={r.image} alt={`${r.from} to ${r.to}`} />
+                  <Image src={r.image} alt={`${r.from} to ${r.to}`} width={100} height={100} />
                 </div>
 
                 <div className="route-price">{r.price}</div>
@@ -522,7 +522,7 @@ export default function HomePage({ setPage }) {
 
                 <div className="testi-author">
                   <div className="testi-avatar">
-                    <Image src={t.image} alt={t.name} />
+                    <Image src={t.image} alt={t.name} width={100} height={100} />
                   </div>
 
                   <div>
@@ -555,7 +555,7 @@ export default function HomePage({ setPage }) {
               <div className="app-btn-icon">
                 <Image
                   src="/images/playstore.png"
-                  alt="Google Play"
+                  alt="Google Play" width={100} height={100}
                 />
               </div>
 
@@ -570,7 +570,7 @@ export default function HomePage({ setPage }) {
               <div className="app-btn-icon">
                 <Image
                   src="/images/app-store.png"
-                  alt="App Store"
+                  alt="App Store" width={100} height={100}
                 />
               </div>
 
@@ -590,7 +590,7 @@ export default function HomePage({ setPage }) {
               <div className="app-btn-icon">
                 <Image
                   src="/images/whatsapp.png"
-                  alt="WhatsApp"
+                  alt="WhatsApp" width={100} height={100}
                 />
               </div>
 
