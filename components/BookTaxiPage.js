@@ -77,7 +77,7 @@ export default function BookTaxiPage() {
                         onClick={() => setSelectedCab(c.id)}
                       >
                         <div className="cab-option-image">
-                          <Image src={c.image} alt={c.name} />
+                          <Image src={c.image} alt={c.name} width={100} height={100}/>
                         </div>
 
                         <div className="cab-option-name">{c.name}</div>
