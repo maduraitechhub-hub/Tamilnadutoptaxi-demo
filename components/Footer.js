@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 export default function Footer({ setPage }) {
   const go = (id) => {
@@ -12,7 +13,7 @@ export default function Footer({ setPage }) {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src="/logo.png" alt="TamilNadu Drop Taxi" className="footer-logo-img" />
+              <Image src="/logo.png" alt="TamilNadu Drop Taxi" className="footer-logo-img" />
               <div>
                 <div className="footer-logo-name">TamilNadu Drop Taxi</div>
                 <div className="footer-logo-sub">Premium Cab Service</div>
