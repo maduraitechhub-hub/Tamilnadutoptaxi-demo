@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import FormFeedbackModal from './FormFeedbackModal';
+import Image from 'next/image';
 
 const cabs = [
   {
@@ -76,7 +77,7 @@ export default function BookTaxiPage() {
                         onClick={() => setSelectedCab(c.id)}
                       >
                         <div className="cab-option-image">
-                          <img src={c.image} alt={c.name} />
+                          <Image src={c.image} alt={c.name} />
                         </div>
 
                         <div className="cab-option-name">{c.name}</div>
