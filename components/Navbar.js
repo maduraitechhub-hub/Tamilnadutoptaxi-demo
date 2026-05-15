@@ -32,7 +32,7 @@ export default function Navbar({ page, setPage }) {
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
         <div className="nav-inner">
           <div className="nav-logo" onClick={() => go('home')}>
-            <Image src="/logo.png" alt="TamilNadu Drop Taxi Logo" className="nav-logo-img" />
+            <Image src="/logo.png" alt="TamilNadu Drop Taxi Logo" className="nav-logo-img" width={100} height={100} />
             <div className="nav-logo-text">
               <span className="nav-logo-main">TamilNadu Drop Taxi</span>
               <span className="nav-logo-sub">Premium Cab Service</span>
