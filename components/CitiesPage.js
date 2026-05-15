@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 const cities = [
   {
@@ -57,7 +58,7 @@ export default function CitiesPage({ setPage }) {
                 }}
               >
                 <div className="city-img">
-                  <img src={c.image} alt={c.name} />
+                  <Image src={c.image} alt={c.name} />
                 </div>
 
                 <div className="city-body">
