@@ -58,7 +58,7 @@ export default function CitiesPage({ setPage }) {
                 }}
               >
                 <div className="city-img">
-                  <Image src={c.image} alt={c.name} />
+                  <Image src={c.image} alt={c.name} width={100} height={100} />
                 </div>
 
                 <div className="city-body">
