@@ -3,6 +3,7 @@ import { useState } from 'react';
 import BookingForm from './BookingForm';
 import StatsBar from './StatsBar';
 import FormFeedbackModal from './FormFeedbackModal';
+import Image from 'next/image';
 
 const services = [
   {
@@ -285,7 +286,7 @@ export default function HomePage({ setPage }) {
             {services.map((f) => (
               <div key={f.title} className="feature-card">
                 <div className="feature-icon">
-                  <img src={f.icon} alt={f.title} />
+                  <Image src={f.icon} alt={f.title} />
                 </div>
                 <div className="feature-title">{f.title}</div>
                 <div className="feature-desc">{f.desc}</div>
@@ -320,7 +321,7 @@ export default function HomePage({ setPage }) {
 
                 <div className="fleet-img">
 
-                  <img
+                  <Image
                     src={f.image}
                     alt={f.name}
                     className="fleet-car-image"
@@ -385,7 +386,7 @@ export default function HomePage({ setPage }) {
             {features.map((f) => (
               <div key={f.title} className="feature-card">
                 <div className="feature-icon">
-                  <img src={f.icon} alt={f.title} />
+                  <Image src={f.icon} alt={f.title} />
                 </div>
                 <div className="feature-title">{f.title}</div>
                 <div className="feature-desc">{f.desc}</div>
@@ -423,7 +424,7 @@ export default function HomePage({ setPage }) {
 
                 {/* Route Image */}
                 <div className="route-image">
-                  <img src={r.image} alt={`${r.from} to ${r.to}`} />
+                  <Image src={r.image} alt={`${r.from} to ${r.to}`} />
                 </div>
 
                 <div className="route-price">{r.price}</div>
@@ -480,7 +481,7 @@ export default function HomePage({ setPage }) {
             </div>
             <div className="cities-map">
 
-              <img
+              <Image
                 src="/images/tamilnadu-map.png"
                 alt="Tamil Nadu Cities"
                 width={650}
@@ -521,7 +522,7 @@ export default function HomePage({ setPage }) {
 
                 <div className="testi-author">
                   <div className="testi-avatar">
-                    <img src={t.image} alt={t.name} />
+                    <Image src={t.image} alt={t.name} />
                   </div>
 
                   <div>
@@ -552,7 +553,7 @@ export default function HomePage({ setPage }) {
             {/* GOOGLE PLAY */}
             <button className="app-btn" type="button" onClick={() => setAppModalOpen(true)}>
               <div className="app-btn-icon">
-                <img
+                <Image
                   src="/images/playstore.png"
                   alt="Google Play"
                 />
@@ -567,7 +568,7 @@ export default function HomePage({ setPage }) {
             {/* APP STORE */}
             <button className="app-btn" type="button" onClick={() => setAppModalOpen(true)}>
               <div className="app-btn-icon">
-                <img
+                <Image
                   src="/images/app-store.png"
                   alt="App Store"
                 />
@@ -587,7 +588,7 @@ export default function HomePage({ setPage }) {
               }
             >
               <div className="app-btn-icon">
-                <img
+                <Image
                   src="/images/whatsapp.png"
                   alt="WhatsApp"
                 />
