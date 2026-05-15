@@ -9,6 +9,7 @@ import CitiesPage from './CitiesPage';
 import AboutPage from './AboutPage';
 import PartnerPage from './PartnerPage';
 import ContactPage from './ContactPage';
+import Image from 'next/image';
 
 export default function TamilNaduDropTaxi() {
   const [page, setPage] = useState('home');
@@ -35,7 +36,7 @@ export default function TamilNaduDropTaxi() {
         onClick={() => window.open('https://wa.me/918122148519', '_blank')}
         title="Chat on WhatsApp"
       >
-        <img src="/images/floatingwb.png" alt="WhatsApp" className="whatsapp-icon" />
+        <Image src="/images/floatingwb.png" alt="WhatsApp" className="whatsapp-icon" />
       </button>
     </div>
   );
