@@ -118,7 +118,15 @@ export default function BookingForm({ compact = false }) {
                 disabled={sending}
               />
             </div>
-
+           <div className="form-group">
+              <label>Vehicle Type</label>
+              <select name="vehicleType" required disabled={sending}>
+                <option value="Sedan">Sedan</option>
+                <option value="Etios">Etios</option>
+                <option value="SUV">SUV</option>
+                <option value="Innova">Innova</option>
+              </select>
+            </div>
             <div className="form-group">
               <label>Pickup Date</label>
               <input type="date" name="pickupDate" required disabled={sending} />
@@ -173,6 +181,15 @@ export default function BookingForm({ compact = false }) {
                 disabled={sending}
               />
             </div>
+           <div className="form-group">
+              <label>Vehicle Type</label>
+              <select name="vehicleType" required disabled={sending}>
+                <option value="Sedan">Sedan</option>
+                <option value="Etios">Etios</option>
+                <option value="SUV">SUV</option>
+                <option value="Innova">Innova</option>
+              </select>
+            </div>
             <div className="form-group">
               <label>Pickup Date</label>
               <input type="date" name="pickupDate" required disabled={sending} />
@@ -200,7 +217,15 @@ export default function BookingForm({ compact = false }) {
                 disabled={sending}
               />
             </div>
-
+            <div className="form-group">
+              <label>Vehicle Type</label>
+              <select name="vehicleType" required disabled={sending}>
+                <option value="Sedan">Sedan</option>
+                <option value="Etios">Etios</option>
+                <option value="SUV">SUV</option>
+                <option value="Innova">Innova</option>
+              </select>
+            </div>
             <div className="form-group">
               <label>Package</label>
               <select name="rentalPackage" required disabled={sending}>
