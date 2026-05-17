@@ -1,4 +1,6 @@
 import '../styles/globals.css';
+import Script from 'next/script';
+
 import { defaultPageSeo } from '../lib/seoConfig';
 import { getSiteUrl } from '../lib/site';
 
@@ -136,6 +138,22 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/logo.png" type="image/png" />
+
+        {/* Google Ads Tag */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18168765995"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'AW-18168765995');
+          `}
+        </Script>
       </head>
 
       <body>
