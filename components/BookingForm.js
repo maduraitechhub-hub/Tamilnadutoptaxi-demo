@@ -1,12 +1,55 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { submitSiteForm } from '../lib/submitSiteForm';
+import { fetchTripEstimate } from '../lib/fetchTripEstimate';
 import FormFeedbackModal from './FormFeedbackModal';
+import PlacesAutocompleteInput from './PlacesAutocompleteInput';
+import TripEstimationPanel from './TripEstimationPanel';
+
+const TRIP_TYPE_LABELS = {
+  oneway: 'One way',
+  roundtrip: 'Round trip',
+  rental: 'Rental',
+};
+
+function estimatePayloadFromForm(form, tripType) {
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd.entries());
+  return {
+    tripType,
+    vehicleType: data.vehicleType || 'Sedan',
+    pickup: data.pickup,
+    drop: data.drop,
+    fromCity: data.fromCity,
+    toCity: data.toCity,
+    rentalCity: data.rentalCity,
+    rentalPackage: data.rentalPackage,
+  };
+}
+
+function bookingPayloadFromForm(form, tripType, estimate) {
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd.entries());
+  return {
+    ...data,
+    tripType,
+    estimatedAmount: String(estimate.totalAmount),
+    estimatedAmountFormatted: estimate.totalAmountFormatted,
+    totalDistance: estimate.distanceKmLabel,
+    totalDuration: estimate.durationLabel,
+    ratePerKm: estimate.ratePerKmLabel,
+    driverAllowance: estimate.driverAllowance,
+  };
+}
 
 export default function BookingForm({ compact = false }) {
+  const formRef = useRef(null);
   const [activeTab, setActiveTab] = useState('oneway');
-  const [sending, setSending] = useState(false);
+  const [estimating, setEstimating] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const [estimate, setEstimate] = useState(null);
+  const [formKey, setFormKey] = useState(0);
   const [modal, setModal] = useState({
     open: false,
     variant: 'success',
@@ -16,21 +59,51 @@ export default function BookingForm({ compact = false }) {
 
   const closeModal = () => setModal((m) => ({ ...m, open: false }));
 
-  const handleSubmit = async (e) => {
+  const resetEstimate = () => setEstimate(null);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    resetEstimate();
+  };
+
+  const handleGetEstimate = async (e) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    const payload = Object.fromEntries(fd.entries());
-    setSending(true);
+    const form = formRef.current;
+    if (!form) return;
+
+    setEstimating(true);
+    resetEstimate();
     try {
-      await submitSiteForm('booking', payload);
+      const result = await fetchTripEstimate(estimatePayloadFromForm(form, activeTab));
+      setEstimate(result);
+      form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      setModal({
+        open: true,
+        variant: 'error',
+        title: 'Could not estimate fare',
+        message: err instanceof Error ? err.message : 'Could not calculate trip fare.',
+      });
+    } finally {
+      setEstimating(false);
+    }
+  };
+
+  const handleConfirmBooking = async () => {
+    const form = formRef.current;
+    if (!form || !estimate) return;
+
+    setConfirming(true);
+    try {
+      await submitSiteForm('booking', bookingPayloadFromForm(form, activeTab, estimate));
       form.reset();
+      setFormKey((k) => k + 1);
+      resetEstimate();
       setModal({
         open: true,
         variant: 'success',
-        title: 'Request received',
-        message:
-          'Thank you! Our team will contact you shortly with a fare quote. You can also WhatsApp us at +91 8122148519.',
+        title: 'Booking confirmed',
+        message: `Your booking request was sent. Estimated fare: ${estimate.totalAmountFormatted}. Our team will contact you shortly. You can also WhatsApp us at +91 8122148519.`,
       });
     } catch (err) {
       setModal({
@@ -40,9 +113,12 @@ export default function BookingForm({ compact = false }) {
         message: err instanceof Error ? err.message : 'Could not send booking request.',
       });
     } finally {
-      setSending(false);
+      setConfirming(false);
     }
   };
+
+  const formDisabled = estimating || confirming;
+  const showEstimatePanel = estimating || estimate;
 
   return (
     <div className="booking-wrapper">
@@ -50,7 +126,7 @@ export default function BookingForm({ compact = false }) {
         <button
           type="button"
           className={`tab-btn ${activeTab === 'oneway' ? 'active' : ''}`}
-          onClick={() => setActiveTab('oneway')}
+          onClick={() => handleTabChange('oneway')}
         >
           One Way
         </button>
@@ -58,7 +134,7 @@ export default function BookingForm({ compact = false }) {
         <button
           type="button"
           className={`tab-btn ${activeTab === 'roundtrip' ? 'active' : ''}`}
-          onClick={() => setActiveTab('roundtrip')}
+          onClick={() => handleTabChange('roundtrip')}
         >
           Round Trip
         </button>
@@ -66,13 +142,13 @@ export default function BookingForm({ compact = false }) {
         <button
           type="button"
           className={`tab-btn ${activeTab === 'rental' ? 'active' : ''}`}
-          onClick={() => setActiveTab('rental')}
+          onClick={() => handleTabChange('rental')}
         >
           Rental
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="booking-form">
+      <form ref={formRef} onSubmit={handleGetEstimate} className="booking-form">
         <input type="hidden" name="tripType" value={activeTab} readOnly />
 
         {activeTab === 'oneway' && (
@@ -84,7 +160,7 @@ export default function BookingForm({ compact = false }) {
                 name="customerName"
                 placeholder="Enter your name"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
             <div className="form-group">
@@ -94,33 +170,33 @@ export default function BookingForm({ compact = false }) {
                 name="phone"
                 placeholder="Enter mobile number"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
             <div className="form-group">
               <label>Pickup Location</label>
-              <input
-                type="text"
+              <PlacesAutocompleteInput
+                key={`pickup-${formKey}`}
                 name="pickup"
-                placeholder="Enter pickup city"
+                placeholder="Enter pickup location"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
 
             <div className="form-group">
               <label>Drop Location</label>
-              <input
-                type="text"
+              <PlacesAutocompleteInput
+                key={`drop-${formKey}`}
                 name="drop"
                 placeholder="Enter destination"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
-           <div className="form-group">
+            <div className="form-group">
               <label>Vehicle Type</label>
-              <select name="vehicleType" required disabled={sending}>
+              <select name="vehicleType" required disabled={formDisabled}>
                 <option value="Sedan">Sedan</option>
                 <option value="Etios">Etios</option>
                 <option value="SUV">SUV</option>
@@ -129,11 +205,11 @@ export default function BookingForm({ compact = false }) {
             </div>
             <div className="form-group">
               <label>Pickup Date</label>
-              <input type="date" name="pickupDate" required disabled={sending} />
+              <input type="date" name="pickupDate" required disabled={formDisabled} />
             </div>
             <div className="form-group">
               <label>Pickup Time</label>
-              <input type="time" name="pickupTime" required disabled={sending} />
+              <input type="time" name="pickupTime" required disabled={formDisabled} />
             </div>
           </div>
         )}
@@ -147,7 +223,7 @@ export default function BookingForm({ compact = false }) {
                 name="customerName"
                 placeholder="Enter your name"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
             <div className="form-group">
@@ -157,33 +233,35 @@ export default function BookingForm({ compact = false }) {
                 name="phone"
                 placeholder="Enter mobile number"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
             <div className="form-group">
               <label>From City</label>
-              <input
-                type="text"
+              <PlacesAutocompleteInput
+                key={`from-${formKey}`}
                 name="fromCity"
+                mode="city"
                 placeholder="Enter from city"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
 
             <div className="form-group">
               <label>To City</label>
-              <input
-                type="text"
+              <PlacesAutocompleteInput
+                key={`to-${formKey}`}
                 name="toCity"
+                mode="city"
                 placeholder="Enter to city"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
-           <div className="form-group">
+            <div className="form-group">
               <label>Vehicle Type</label>
-              <select name="vehicleType" required disabled={sending}>
+              <select name="vehicleType" required disabled={formDisabled}>
                 <option value="Sedan">Sedan</option>
                 <option value="Etios">Etios</option>
                 <option value="SUV">SUV</option>
@@ -192,15 +270,15 @@ export default function BookingForm({ compact = false }) {
             </div>
             <div className="form-group">
               <label>Pickup Date</label>
-              <input type="date" name="pickupDate" required disabled={sending} />
+              <input type="date" name="pickupDate" required disabled={formDisabled} />
             </div>
             <div className="form-group">
               <label>Pickup Time</label>
-              <input type="time" name="pickupTime" required disabled={sending} />
+              <input type="time" name="pickupTime" required disabled={formDisabled} />
             </div>
             <div className="form-group">
               <label>Return Date</label>
-              <input type="date" name="returnDate" required disabled={sending} />
+              <input type="date" name="returnDate" required disabled={formDisabled} />
             </div>
           </div>
         )}
@@ -209,17 +287,17 @@ export default function BookingForm({ compact = false }) {
           <div className="form-grid">
             <div className="form-group">
               <label>City</label>
-              <input
-                type="text"
+              <PlacesAutocompleteInput
+                key={`rental-${formKey}`}
                 name="rentalCity"
-                placeholder="Enter Airport Name / City / Area"
+                placeholder="Enter airport, city, or area"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
             <div className="form-group">
               <label>Vehicle Type</label>
-              <select name="vehicleType" required disabled={sending}>
+              <select name="vehicleType" required disabled={formDisabled}>
                 <option value="Sedan">Sedan</option>
                 <option value="Etios">Etios</option>
                 <option value="SUV">SUV</option>
@@ -228,7 +306,7 @@ export default function BookingForm({ compact = false }) {
             </div>
             <div className="form-group">
               <label>Package</label>
-              <select name="rentalPackage" required disabled={sending}>
+              <select name="rentalPackage" required disabled={formDisabled}>
                 <option value="">Select Package</option>
                 <option value="2 Hours / 20 KM">2 Hours / 20 KM</option>
                 <option value="4 Hours / 40 KM">4 Hours / 40 KM</option>
@@ -247,7 +325,7 @@ export default function BookingForm({ compact = false }) {
                 name="customerName"
                 placeholder="Enter your name"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
             <div className="form-group">
@@ -257,25 +335,38 @@ export default function BookingForm({ compact = false }) {
                 name="phone"
                 placeholder="+91 XXXXX XXXXX"
                 required
-                disabled={sending}
+                disabled={formDisabled}
               />
             </div>
             <div className="form-group">
               <label>Pickup Date</label>
-              <input type="date" name="pickupDate" required disabled={sending} />
+              <input type="date" name="pickupDate" required disabled={formDisabled} />
             </div>
 
             <div className="form-group">
               <label>Pickup Time</label>
-              <input type="time" name="pickupTime" required disabled={sending} />
+              <input type="time" name="pickupTime" required disabled={formDisabled} />
             </div>
           </div>
         )}
 
-        <button type="submit" className="submit-btn btn-book-full" disabled={sending}>
-          {sending ? 'Sending…' : 'Get Fare Quote'}
-        </button>
+        {!estimate && (
+          <button type="submit" className="submit-btn btn-book-full" disabled={formDisabled}>
+            {estimating ? 'Calculating…' : 'Get Trip Estimation'}
+          </button>
+        )}
       </form>
+
+      {showEstimatePanel && (
+        <TripEstimationPanel
+          estimate={estimate}
+          tripTypeLabel={TRIP_TYPE_LABELS[activeTab]}
+          loading={estimating}
+          confirming={confirming}
+          onConfirm={handleConfirmBooking}
+          onBack={estimate ? resetEstimate : undefined}
+        />
+      )}
 
       <FormFeedbackModal
         open={modal.open}

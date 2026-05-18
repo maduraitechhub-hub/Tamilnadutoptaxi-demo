@@ -512,6 +512,53 @@ body {
   border-color: var(--green);
 }
 
+/* Google PlaceAutocompleteElement (Places API new) */
+.places-autocomplete-field {
+  position: relative;
+  width: 100%;
+}
+
+.places-autocomplete-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.places-autocomplete-host {
+  width: 100%;
+  display: block;
+}
+
+.places-autocomplete-host gmp-place-autocomplete {
+  width: 100%;
+  color-scheme: light;
+  --gmp-mat-color-surface: #ffffff;
+  --gmp-mat-color-on-surface: var(--text);
+  --gmp-mat-font-family: 'Nunito', sans-serif;
+  --gmp-mat-font-body-medium: 400 14px/1.4 'Nunito', sans-serif;
+}
+
+.form-group .places-autocomplete-host gmp-place-autocomplete {
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.form-group .places-autocomplete-host gmp-place-autocomplete:focus-within {
+  border-color: var(--green);
+}
+
+.places-autocomplete-host.is-disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
 .btn-book-full {
   width: 100%;
   background: linear-gradient(135deg, var(--green), var(--green-dark));
@@ -1926,6 +1973,135 @@ body {
   font-size: 24px;
   font-weight: 900;
   color: var(--green);
+}
+
+.trip-estimation {
+  margin-top: 24px;
+  padding: 22px 20px 20px;
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  box-shadow: 0 8px 28px rgba(26, 122, 60, 0.08);
+}
+
+.trip-estimation-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.trip-estimation-title {
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--green);
+}
+
+.trip-estimation-amount {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #1a6fd4;
+}
+
+.trip-estimation-trip-type {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.trip-estimation-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.trip-estimation-table th,
+.trip-estimation-table td {
+  border: 1px solid #d8e2dc;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.trip-estimation-table th {
+  width: 46%;
+  font-weight: 700;
+  color: var(--text);
+  background: #fafcfb;
+}
+
+.trip-estimation-table td {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.trip-estimation-note {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #3b82c4;
+  line-height: 1.5;
+}
+
+.trip-estimation-loading {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.trip-estimation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trip-estimation-back {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--text-muted);
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+}
+
+.trip-estimation-back:hover:not(:disabled) {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.btn-confirm-booking {
+  width: 100%;
+  background: linear-gradient(135deg, #e53935, #c62828);
+  color: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  box-shadow: 0 4px 18px rgba(229, 57, 53, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-confirm-booking:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(229, 57, 53, 0.45);
+}
+
+.btn-confirm-booking:disabled,
+.trip-estimation-back:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 .highlight-bar {

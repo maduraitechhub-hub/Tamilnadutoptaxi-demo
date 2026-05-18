@@ -94,6 +94,13 @@ export async function POST(request) {
         returnDate: 'Return date',
         rentalCity: 'City / area',
         rentalPackage: 'Package',
+        vehicleType: 'Vehicle type',
+        estimatedAmountFormatted: 'Estimated fare',
+        estimatedAmount: 'Estimated fare (₹)',
+        totalDistance: 'Total distance',
+        totalDuration: 'Total duration',
+        ratePerKm: 'Rate per km',
+        driverAllowance: 'Driver allowance',
       };
 
       rows = { 'Trip type': tripTypeLabel };
