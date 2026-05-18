@@ -139,18 +139,16 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/logo.png" type="image/png" />
 
-        {/* Google Ads Tag */}
+        {/* Google tag (gtag.js) — beforeInteractive so crawlers see it in initial HTML */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18168765995"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
-
-        <Script id="google-ads" strategy="afterInteractive">
+        <Script id="google-ads" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
             gtag('config', 'AW-18168765995');
           `}
         </Script>

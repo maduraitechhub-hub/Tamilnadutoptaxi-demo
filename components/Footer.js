@@ -13,7 +13,13 @@ export default function Footer({ setPage }) {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-logo">
-              <Image src="/logo.png" alt="TamilNadu Drop Taxi" className="footer-logo-img" />
+              <Image
+                src="/logo.png"
+                alt="TamilNadu Drop Taxi"
+                className="footer-logo-img"
+                width={52}
+                height={52}
+              />
               <div>
                 <div className="footer-logo-name">TamilNadu Drop Taxi</div>
                 <div className="footer-logo-sub">Premium Cab Service</div>

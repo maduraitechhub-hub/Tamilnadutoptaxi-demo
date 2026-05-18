@@ -36,7 +36,7 @@ export default function TamilNaduDropTaxi() {
         onClick={() => window.open('https://wa.me/918122148519', '_blank')}
         title="Chat on WhatsApp"
       >
-        <Image src="/images/floatingwb.png" alt="WhatsApp" className="whatsapp-icon" />
+        <Image src="/images/floatingwb.png" width={58} height={58} alt="WhatsApp" className="whatsapp-icon" />
       </button>
     </div>
   );
