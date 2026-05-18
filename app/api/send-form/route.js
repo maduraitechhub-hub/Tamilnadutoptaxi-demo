@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { sendFormEmail } from '../../../lib/mailer';
+import { isValidPickupTime, PICKUP_TIME_INVALID_MESSAGE } from '../../../lib/pickupTime';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -79,6 +80,14 @@ export async function POST(request) {
 
       const tripTypeLabel =
         tripType === 'oneway' ? 'One way' : tripType === 'roundtrip' ? 'Round trip' : 'Rental';
+
+      const pickupTime = trim(payload.pickupTime, 10);
+      if (pickupTime && !isValidPickupTime(pickupTime)) {
+        return NextResponse.json(
+          { ok: false, error: PICKUP_TIME_INVALID_MESSAGE },
+          { status: 400 }
+        );
+      }
 
       subject = `[Website Booking] ${tripTypeLabel}`;
 

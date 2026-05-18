@@ -7,6 +7,12 @@ import { fetchTripEstimate } from '../lib/fetchTripEstimate';
 import FormFeedbackModal from './FormFeedbackModal';
 import PlacesAutocompleteInput from './PlacesAutocompleteInput';
 import TripEstimationPanel from './TripEstimationPanel';
+import {
+  isValidPickupTime,
+  PICKUP_TIME_INVALID_MESSAGE,
+  PICKUP_TIME_MAX,
+  PICKUP_TIME_MIN,
+} from '../lib/pickupTime';
 
 const cabs = [
   { id: 'sedan', image: '/images/dzire.png', name: 'Sedan', price: '₹14/km' },
@@ -45,6 +51,16 @@ export default function BookTaxiPage() {
     if (!form) return;
 
     const fd = new FormData(form);
+    if (!isValidPickupTime(fd.get('pickupTime'))) {
+      setBookingModal({
+        open: true,
+        variant: 'error',
+        title: 'Invalid pickup time',
+        message: PICKUP_TIME_INVALID_MESSAGE,
+      });
+      return;
+    }
+
     const pickup = fd.get('pickup');
     const drop = fd.get('drop');
 
@@ -75,6 +91,16 @@ export default function BookTaxiPage() {
     if (!form || !estimate) return;
 
     const fd = new FormData(form);
+    if (!isValidPickupTime(fd.get('pickupTime'))) {
+      setBookingModal({
+        open: true,
+        variant: 'error',
+        title: 'Invalid pickup time',
+        message: PICKUP_TIME_INVALID_MESSAGE,
+      });
+      return;
+    }
+
     const payload = Object.fromEntries(fd.entries());
 
     setConfirming(true);
@@ -216,7 +242,14 @@ export default function BookTaxiPage() {
                   <div className="form-row">
                     <div className="form-group">
                       <label>🕐 Pickup Time</label>
-                      <input type="time" name="pickupTime" required disabled={formDisabled} />
+                      <input
+                        type="time"
+                        name="pickupTime"
+                        min={PICKUP_TIME_MIN}
+                        max={PICKUP_TIME_MAX}
+                        required
+                        disabled={formDisabled}
+                      />
                     </div>
                     <div className="form-group">
                       <label>👥 Passengers</label>
