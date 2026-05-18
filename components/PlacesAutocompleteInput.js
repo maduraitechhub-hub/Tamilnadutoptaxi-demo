@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import { getGoogleMapsApiKey, loadPlacesLibrary } from '../lib/googlePlaces';
 
 const TAMIL_NADU_BIAS = {
-  center: { lat: 11.1271, lng: 78.6569 },
-  radius: 450000,
+  south: 8.0,
+  west: 76.2,
+  north: 13.6,
+  east: 80.4,
 };
 
 function readWidgetText(element) {
