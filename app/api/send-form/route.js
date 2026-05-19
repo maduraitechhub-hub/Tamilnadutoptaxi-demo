@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { sendFormEmail } from '../../../lib/mailer';
-import { isValidPickupTime, PICKUP_TIME_INVALID_MESSAGE } from '../../../lib/pickupTime';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -19,6 +18,20 @@ function escapeHtml(s) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function formatTime12h(value) {
+  const s = String(value || '').trim();
+  const match = /^(\d{1,2}):(\d{2})$/.exec(s);
+  if (!match) return s;
+
+  const hours24 = Number(match[1]);
+  const minutes = match[2];
+  if (!Number.isInteger(hours24) || hours24 < 0 || hours24 > 23) return s;
+
+  const period = hours24 >= 12 ? 'PM' : 'AM';
+  const hours12 = hours24 % 12 || 12;
+  return `${hours12}:${minutes} ${period}`;
 }
 
 function rowsHtml(obj) {
@@ -81,14 +94,6 @@ export async function POST(request) {
       const tripTypeLabel =
         tripType === 'oneway' ? 'One way' : tripType === 'roundtrip' ? 'Round trip' : 'Rental';
 
-      const pickupTime = trim(payload.pickupTime, 10);
-      if (pickupTime && !isValidPickupTime(pickupTime)) {
-        return NextResponse.json(
-          { ok: false, error: PICKUP_TIME_INVALID_MESSAGE },
-          { status: 400 }
-        );
-      }
-
       subject = `[Website Booking] ${tripTypeLabel}`;
 
       const fieldLabels = {
@@ -116,7 +121,9 @@ export async function POST(request) {
       for (const [k, v] of Object.entries(payload)) {
         if (k === 'tripType') continue;
         const label = fieldLabels[k] || k;
-        rows[label] = trim(v, k === 'message' ? MAX : 500);
+        let value = trim(v, k === 'message' ? MAX : 500);
+        if (k === 'pickupTime') value = formatTime12h(value);
+        rows[label] = value;
       }
     } else if (formType === 'partner') {
       const fullName = trim(payload.fullName, 200);

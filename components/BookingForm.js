@@ -77,17 +77,6 @@ export default function BookingForm({ compact = false }) {
     const form = formRef.current;
     if (!form) return;
 
-    const pickupTime = new FormData(form).get('pickupTime');
-    if (!isValidPickupTime(pickupTime)) {
-      setModal({
-        open: true,
-        variant: 'error',
-        title: 'Invalid pickup time',
-        message: PICKUP_TIME_INVALID_MESSAGE,
-      });
-      return;
-    }
-
     setEstimating(true);
     resetEstimate();
     try {
@@ -109,17 +98,6 @@ export default function BookingForm({ compact = false }) {
   const handleConfirmBooking = async () => {
     const form = formRef.current;
     if (!form || !estimate) return;
-
-    const pickupTime = new FormData(form).get('pickupTime');
-    if (!isValidPickupTime(pickupTime)) {
-      setModal({
-        open: true,
-        variant: 'error',
-        title: 'Invalid pickup time',
-        message: PICKUP_TIME_INVALID_MESSAGE,
-      });
-      return;
-    }
 
     setConfirming(true);
     try {
@@ -237,14 +215,7 @@ export default function BookingForm({ compact = false }) {
             </div>
             <div className="form-group">
               <label>Pickup Time</label>
-              <input
-                type="time"
-                name="pickupTime"
-                min={PICKUP_TIME_MIN}
-                max={PICKUP_TIME_MAX}
-                required
-                disabled={formDisabled}
-              />
+              <input type="time" name="pickupTime" required disabled={formDisabled} />
             </div>
           </div>
         )}
@@ -309,14 +280,7 @@ export default function BookingForm({ compact = false }) {
             </div>
             <div className="form-group">
               <label>Pickup Time</label>
-              <input
-                type="time"
-                name="pickupTime"
-                min={PICKUP_TIME_MIN}
-                max={PICKUP_TIME_MAX}
-                required
-                disabled={formDisabled}
-              />
+              <input type="time" name="pickupTime" required disabled={formDisabled} />
             </div>
             <div className="form-group">
               <label>Return Date</label>
@@ -387,14 +351,7 @@ export default function BookingForm({ compact = false }) {
 
             <div className="form-group">
               <label>Pickup Time</label>
-              <input
-                type="time"
-                name="pickupTime"
-                min={PICKUP_TIME_MIN}
-                max={PICKUP_TIME_MAX}
-                required
-                disabled={formDisabled}
-              />
+              <input type="time" name="pickupTime" required disabled={formDisabled} />
             </div>
           </div>
         )}
