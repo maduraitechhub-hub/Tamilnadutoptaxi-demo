@@ -6,12 +6,12 @@ import { fetchTripEstimate } from '../lib/fetchTripEstimate';
 import FormFeedbackModal from './FormFeedbackModal';
 import PlacesAutocompleteInput from './PlacesAutocompleteInput';
 import TripEstimationPanel from './TripEstimationPanel';
-import {
-  isValidPickupTime,
-  PICKUP_TIME_INVALID_MESSAGE,
-  PICKUP_TIME_MAX,
-  PICKUP_TIME_MIN,
-} from '../lib/pickupTime';
+// import {
+//   isValidPickupTime,
+//   PICKUP_TIME_INVALID_MESSAGE,
+//   PICKUP_TIME_MAX,
+//   PICKUP_TIME_MIN,
+// } from '../lib/pickupTime';
 
 const TRIP_TYPE_LABELS = {
   oneway: 'One way',
