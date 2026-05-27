@@ -63,7 +63,7 @@ const fleet = [
     seats: '4 Seater',
     ac: 'AC',
     luggage: '2 Bags',
-    price: '₹14/km',
+    price: '₹15/km',
     image: '/images/dzire.png',
   },
   {
@@ -72,7 +72,7 @@ const fleet = [
     seats: '4 Seater',
     ac: 'AC',
     luggage: '2 Bags',
-    price: '₹15/km',
+    price: '₹16/km',
     image: '/images/etios.png',
   },
   {
@@ -81,7 +81,7 @@ const fleet = [
     seats: '6 Seater',
     ac: 'AC',
     luggage: '4 Bags',
-    price: '₹19/km',
+    price: '₹20/km',
     image: '/images/innova.png',
   },
   {
@@ -90,7 +90,7 @@ const fleet = [
     seats: '7 Seater',
     ac: 'AC',
     luggage: '5 Bags',
-    price: '₹22/km',
+    price: '₹23/km',
     image: '/images/crysta.webp',
   },
 ];

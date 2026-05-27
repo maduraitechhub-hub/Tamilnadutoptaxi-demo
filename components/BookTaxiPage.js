@@ -9,10 +9,10 @@ import PlacesAutocompleteInput from './PlacesAutocompleteInput';
 import TripEstimationPanel from './TripEstimationPanel';
 
 const cabs = [
-  { id: 'sedan', image: '/images/dzire.png', name: 'Sedan', price: '₹14/km' },
-  { id: 'etios', image: '/images/etios.png', name: 'Etios', price: '₹14/km' },
-  { id: 'innova', image: '/images/innova.png', name: 'Innova', price: '₹19/km' },
-  { id: 'crysta', image: '/images/crysta.webp', name: 'Crysta', price: '₹22/km' },
+  { id: 'sedan', image: '/images/dzire.png', name: 'Sedan', price: '₹15/km' },
+  { id: 'etios', image: '/images/etios.png', name: 'Etios', price: '₹16/km' },
+  { id: 'innova', image: '/images/innova.png', name: 'Innova', price: '₹20/km' },
+  { id: 'crysta', image: '/images/crysta.webp', name: 'Crysta', price: '₹23/km' },
 ];
 
 const CAB_VEHICLE = {
