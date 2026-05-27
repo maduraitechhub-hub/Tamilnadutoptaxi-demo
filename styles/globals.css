@@ -1185,6 +1185,12 @@ body {
 
 /* Mobile */
 @media (max-width: 576px) {
+  .hero-title {
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+  }
+  .booking-card {
+    padding: 20px;
+  }
   .stats-inner {
     grid-template-columns: 1fr;
   }
@@ -2377,7 +2383,7 @@ body {
 .tab-btn {
     flex: 1 1;
     padding: 15px;
-    font-size: 15px;
+    font-size: 14px;
     min-width: 100px;
 }
   .form-section-card {
@@ -2459,9 +2465,9 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .section {
-    padding: 64px 20px;
-  }
+.section {
+    padding: 30px 20px;
+}
 
   .partner-card {
     padding: 32px 24px;
@@ -2477,6 +2483,22 @@ body {
 
 /* Mobile */
 @media (max-width: 576px) {
+  .app-section {
+padding: 40px 24px;
+  }
+  .section-sub {
+    margin: 0 auto 20px;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .app-title {
+    font-size: 1.5rem;
+  }
+  .service-cities-section .cities-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
   .route-price {
     font-size: 20px;
   }
