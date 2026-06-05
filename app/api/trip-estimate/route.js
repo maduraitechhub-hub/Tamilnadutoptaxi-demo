@@ -80,6 +80,8 @@ export async function POST(request) {
       distanceKm,
       durationSeconds,
       rentalPackage,
+      pickupDate: body.pickupDate,
+      returnDate: body.returnDate,
     });
 
     return NextResponse.json({
