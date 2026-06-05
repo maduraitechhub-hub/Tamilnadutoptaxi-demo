@@ -31,6 +31,9 @@ function estimatePayloadFromForm(form, tripType) {
     toCity: data.toCity,
     rentalCity: data.rentalCity,
     rentalPackage: data.rentalPackage,
+      // NEW
+    pickupDate: data.pickupDate,
+    returnDate: data.returnDate,
   };
 }
 
